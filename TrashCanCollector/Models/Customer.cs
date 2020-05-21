@@ -11,10 +11,20 @@ namespace TrashCanCollector.Models
     public class Customer
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int CustomerId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string WeeklyPickUpDay { get; set; }
+        public string OneTimePickUp { get; set; }
+        public string StartSubscriptionDate { get; set; }
+        public string EndSubscriptionDate { get; set; }
+
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+        
+       [ForeignKey("Address")]
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
     }
 }

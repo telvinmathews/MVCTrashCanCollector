@@ -45,14 +45,29 @@
                 <span asp-validation-for="EndSubscriptionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="AddressZipCode" class="control-label"></label>
+                <input asp-for="AddressZipCode" class="form-control" />
+                <span asp-validation-for="AddressZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdrressStreet" class="control-label"></label>
+                <input asp-for="AdrressStreet" class="form-control" />
+                <span asp-validation-for="AdrressStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressState" class="control-label"></label>
+                <input asp-for="AddressState" class="form-control" />
+                <span asp-validation-for="AddressState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrashPickUpFee" class="control-label"></label>
+                <input asp-for="TrashPickUpFee" class="form-control" />
+                <span asp-validation-for="TrashPickUpFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="IdentityUserId" class="control-label"></label>
                 <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
                 <span asp-validation-for="IdentityUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddressId" class="control-label"></label>
-                <select asp-for="AddressId" class="form-control" asp-items="ViewBag.AddressId"></select>
-                <span asp-validation-for="AddressId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

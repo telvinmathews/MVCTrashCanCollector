@@ -18,13 +18,14 @@ namespace TrashCanCollector.Models
         public string OneTimePickUp { get; set; }
         public string StartSubscriptionDate { get; set; }
         public string EndSubscriptionDate { get; set; }
+        public int AddressZipCode { get; set; }
+        public string AdrressStreet { get; set; }
+        public string AddressState { get; set; }
+        public int TrashPickUpFee { get; set; } 
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
         
-       [ForeignKey("Address")]
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
     }
 }

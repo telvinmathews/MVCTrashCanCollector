@@ -32,10 +32,19 @@
                 @Html.DisplayNameFor(model => model.EndSubscriptionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
+                @Html.DisplayNameFor(model => model.AddressZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.AdrressStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrashPickUpFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -62,10 +71,19 @@
                 @Html.DisplayFor(modelItem => item.EndSubscriptionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                @Html.DisplayFor(modelItem => item.AddressZipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address.AdressId)
+                @Html.DisplayFor(modelItem => item.AdrressStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrashPickUpFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |

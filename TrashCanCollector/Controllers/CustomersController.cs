@@ -22,7 +22,7 @@ namespace TrashCanCollector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Address).Include(c => c.IdentityUser);
+            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace TrashCanCollector.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Address)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (customer == null)
@@ -49,7 +48,6 @@ namespace TrashCanCollector.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AdressId", "AdressId");
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -59,7 +57,7 @@ namespace TrashCanCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,WeeklyPickUpDay,OneTimePickUp,StartSubscriptionDate,EndSubscriptionDate,IdentityUserId,AddressId")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,WeeklyPickUpDay,OneTimePickUp,StartSubscriptionDate,EndSubscriptionDate,AddressZipCode,AdrressStreet,AddressState,TrashPickUpFee,IdentityUserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace TrashCanCollector.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AdressId", "AdressId", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
@@ -85,7 +82,6 @@ namespace TrashCanCollector.Controllers
             {
                 return NotFound();
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AdressId", "AdressId", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
@@ -95,7 +91,7 @@ namespace TrashCanCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,WeeklyPickUpDay,OneTimePickUp,StartSubscriptionDate,EndSubscriptionDate,IdentityUserId,AddressId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,WeeklyPickUpDay,OneTimePickUp,StartSubscriptionDate,EndSubscriptionDate,AddressZipCode,AdrressStreet,AddressState,TrashPickUpFee,IdentityUserId")] Customer customer)
         {
             if (id != customer.CustomerId)
             {
@@ -122,7 +118,6 @@ namespace TrashCanCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AdressId", "AdressId", customer.AddressId);
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
@@ -136,7 +131,6 @@ namespace TrashCanCollector.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.Address)
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (customer == null)

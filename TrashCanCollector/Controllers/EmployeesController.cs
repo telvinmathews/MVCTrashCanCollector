@@ -20,10 +20,18 @@ namespace TrashCanCollector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            //access current user
+            //see if that user is an employee
+            //if they are, emplement the rest of this action
+            //if they are not, route them to the create
+            //variable for employee
+            var employeeInDb = new Employee();
+
+            DateTime Today = DateTime.Today;
+            var customersPickup = _context.Customers.Where(c => c.AddressZipCode == employeeInDb.ZipCode && c.OneTimePickUp == Today.ToString()).FirstOrDefault();
+            return View(customersPickup);
         }
 
         // GET: Employees/Details/5

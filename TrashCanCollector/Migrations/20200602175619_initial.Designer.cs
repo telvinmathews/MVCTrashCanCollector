@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCanCollector.Data;
 
-namespace TrashCanCollector.Data.Migrations
+namespace TrashCanCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200602175619_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -48,22 +50,22 @@ namespace TrashCanCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1dc2c749-1926-4348-a3e6-2c8cf9037e0a",
-                            ConcurrencyStamp = "f39ad210-6c2d-467f-af7d-d312762732e7",
+                            Id = "3527360a-cd3d-4a66-b6aa-1645bbce33db",
+                            ConcurrencyStamp = "0da0ddb9-440e-4a65-85ff-2a5518999ec3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "94547734-fcdc-4897-9553-f16855f7d651",
-                            ConcurrencyStamp = "4e8c2f72-6c4d-400a-838c-dcce965db2de",
+                            Id = "05fd7c67-0ab3-4fee-b4c5-3b0111a88b9e",
+                            ConcurrencyStamp = "51d21247-699e-48cc-8bd0-c458dc902e41",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "9f455fc5-b0ea-4a62-b77c-3f5320ed31ac",
-                            ConcurrencyStamp = "f43b912d-7dad-4c67-8431-d6548a88fe31",
+                            Id = "094994a8-6921-4a2d-b4b8-0b0443eb82bf",
+                            ConcurrencyStamp = "2e2c7f6d-d495-4b00-8788-2c60ea4d71de",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -238,27 +240,6 @@ namespace TrashCanCollector.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TrashCanCollector.Models.Address", b =>
-                {
-                    b.Property<int>("AdressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ZipCode")
-                        .HasColumnType("int");
-
-                    b.HasKey("AdressId");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("TrashCanCollector.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -266,8 +247,14 @@ namespace TrashCanCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId")
+                    b.Property<string>("AddressState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AddressZipCode")
                         .HasColumnType("int");
+
+                    b.Property<string>("AdrressStreet")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EndSubscriptionDate")
                         .HasColumnType("nvarchar(max)");
@@ -287,12 +274,13 @@ namespace TrashCanCollector.Data.Migrations
                     b.Property<string>("StartSubscriptionDate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TrashPickUpFee")
+                        .HasColumnType("int");
+
                     b.Property<string>("WeeklyPickUpDay")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("IdentityUserId");
 
@@ -375,12 +363,6 @@ namespace TrashCanCollector.Data.Migrations
 
             modelBuilder.Entity("TrashCanCollector.Models.Customer", b =>
                 {
-                    b.HasOne("TrashCanCollector.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
